@@ -59,3 +59,7 @@ typings/
 
 # next.js build output
 .next
+.env
+_data
+backend/node_modules
+frontend/node_modules
