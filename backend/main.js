@@ -80,6 +80,8 @@ router.route('/interest/:int_id/factoid/:f_id')
     }
     if(fact){
       payload.fact = fact;
+    }
+    if(Object.entries(payload).length !== 0){
       knex('factoids').where({id: req.params.f_id})
       .update(payload).then(result=>{
         res.json({updated: req.params.f_id});
