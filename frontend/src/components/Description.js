@@ -1,18 +1,18 @@
 import React from 'react';
 
-import { connect } from 'react-redux';
-import { selectionUpdated } from '../actions';
 class Description extends React.Component{
+  state = {
+    description: null
+  }
+  updateDescription = (description) => {
+    this.setState({description})
+  }
   render(){
     return (
       <div>
-        <p>{this.props.description}</p>
+        <h3>{this.state.description}</h3>
       </div>
     );
   }
 }
-
-const mapStateToProps = (state) =>{
-  return state;
-}
-export default connect(mapStateToProps, {selectionUpdated})(Description);
+export default Description;

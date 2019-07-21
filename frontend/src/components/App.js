@@ -4,9 +4,7 @@ import "../styles.css";
 import "../flickity.css";
 
 import {
-  Button,
   Container,
-  Grid,
   Header,
   Icon,
   Image,
@@ -19,15 +17,18 @@ import {
 } from 'semantic-ui-react'
 
 import Carousel from './Carousel';
-import Description from './Description';
 import FactoidForm from "./FactoidForm";
-
+import Factoids from "./Factoids";
 
 export default class App extends React.Component {
   
   constructor(props){
     super(props);
     this.selected = null;
+    this.factoids_ref = React.createRef();
+  }
+  updateSelection(sel){
+    console.log("App", sel);
   }
   hiddenMsg(source, message, forget = true) {
     let src = source.toLowerCase().split("");
@@ -52,42 +53,25 @@ export default class App extends React.Component {
   }
   
   render(){
-    let things = [
-      {
-        id: 1,
-        description: "Yvette",
-        image_loc: "/img/yvette.jpg"
-      },
-      {
-        id: 2,
-        description: "Suzy at the Beach",
-        image_loc: "/img/suzy.jpg"
-      },
-      {
-        id: 3,
-        description: "Corner",
-        image_loc: "/img/cornering.jpg"
-      }
-    ];
     let title = this.hiddenMsg(
-      'a singular taxonomy of "things" which i am interested in and keep in high regard that could conceptually be visually appealing or considered aesthetically pleasing when presented in a responsive web medium that others may interact & engage with as a means to appraise and assess my abilities whereby i may communicate my readiness and drive towards exsistential fullfilment...',
+      'taxonomy of "things" which i am interested in and keep in high regard that could be considered aesthetically pleasing when presented in a responsive web medium that others may interact and engage with as a means to appraise and assess my drive and abilities.',
       "thank you open drives",
       true
     );
     return (
       <div className="App">
-        <Header  as='h1' style={{fontVariant: 'small-caps', fontWeight: 100}}>{title}</Header>
-        <Header as='h3' style={{ fontWeight: "100", fontStyle: "italic" }}>
+        <Header  as='h5' style={{fontVariant: 'small-caps', fontWeight: 100}}>{title}</Header>
+        <Header as='h5' style={{ fontWeight: "100", fontStyle: "italic" }}>
           and <a href="https://github.com/will-garrett">other ergregious titles</a> by{" "}
           <a href="mailto:the+spam+folder@willgarrett.io?Subject=Your%20Super%20Long%20Title%20Gave%20Me%20a%20Headache%2C%20And%20I%27ve%20Come%20to%20Return%20The%20Favor">
             Will Garrett
           </a>
         </Header>
         
-        <Description description="A Description of A Thing" />
-        <Carousel />
+        <Carousel updater={this.updateSelection}/>
         <Container>
           <FactoidForm />
+          <Factoids ref={this.factoids_ref} factoids={this.factoids}/>
         </Container>
         <h5>
           Source on <a href="https://github.com/will-garrett/codetest">github</a>

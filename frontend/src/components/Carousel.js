@@ -4,17 +4,33 @@ import { connect } from 'react-redux';
 import Flickity from "react-flickity-component";
 import 'flickity-imagesloaded';
 
-import { fetchInterests, selectionUpdated } from '../actions';
+import { fetchInterests, fetchFactoids } from '../actions';
+import Description from "./Description";
 
 class Carousel extends React.Component {
+  state = {
+    selected: null
+  }
+  constructor(props){
+    super(props);
+    this.d_ref = React.createRef();
+  }
   componentDidMount() {
     this.props.fetchInterests();
     this.flkty.on("settle", () => {
-      let sel = this.flkty.selectedIndex;
-      let interests = Object.values(this.props.interests);
-      
+      console.log("FIRED SETTLE EVENT");
+      console.log(this.props);
+      this.props.updater(this.flkty.selectedIndex);
+      this.d_ref.current.updateDescription(this.props.interests[this.flkty.selectedIndex].description);
     });
-
+  }
+  description(){
+    if(Object.entries(this.props.interests).length != 0){
+      return this.props.interests[this.flkty.selectedIndex].description;
+    }
+    else{
+      return;
+    }
   }
   images(data) {
     if(Object.entries(data).length !== 0){
@@ -28,6 +44,8 @@ class Carousel extends React.Component {
   }
   render() {
     return (
+      <div>
+      <Description ref={this.d_ref} description={this.description()} />
       <Flickity
         flickityRef={c => (this.flkty = c)}
         className={"carousel"} // default ''
@@ -38,6 +56,7 @@ class Carousel extends React.Component {
       >
         {this.images(this.props.interests)}
       </Flickity>
+      </div>
     );
   }
 }
@@ -50,4 +69,4 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default connect(mapStateToProps, {fetchInterests,selectionUpdated})(Carousel);
+export default connect(mapStateToProps, {fetchInterests})(Carousel);
