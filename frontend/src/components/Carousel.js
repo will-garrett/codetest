@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import Flickity from "react-flickity-component";
 import 'flickity-imagesloaded';
 
-import { fetchInterests, fetchFactoids } from '../actions';
+import { fetchInterests } from '../actions';
 import Description from "./Description";
+import { Divider } from 'semantic-ui-react';
 
 class Carousel extends React.Component {
   state = {
@@ -18,14 +19,12 @@ class Carousel extends React.Component {
   componentDidMount() {
     this.props.fetchInterests();
     this.flkty.on("settle", () => {
-      console.log("FIRED SETTLE EVENT");
-      console.log(this.props);
-      this.props.updater(this.flkty.selectedIndex);
-      this.d_ref.current.updateDescription(this.props.interests[this.flkty.selectedIndex].description);
+      this.d_ref.current.setState({description: this.props.interests[this.flkty.selectedIndex].description});
+      this.props.updater(this.props.interests[this.flkty.selectedIndex].id);
     });
   }
   description(){
-    if(Object.entries(this.props.interests).length != 0){
+    if(Object.entries(this.props.interests).length !== 0){
       return this.props.interests[this.flkty.selectedIndex].description;
     }
     else{
@@ -45,17 +44,18 @@ class Carousel extends React.Component {
   render() {
     return (
       <div>
-      <Description ref={this.d_ref} description={this.description()} />
-      <Flickity
-        flickityRef={c => (this.flkty = c)}
-        className={"carousel"} // default ''
-        elementType={"div"} // default 'div'
-        options={{ wrapAround: true, groupCells: true, pageDots: false , imagesLoaded: true}} // takes flickity options {}
-        disableImagesLoaded={false} // default false
-        reloadOnUpdate={true}
-      >
-        {this.images(this.props.interests)}
-      </Flickity>
+        <Description ref={this.d_ref} description={this.description()} />
+        <Divider/>
+        <Flickity
+          flickityRef={c => (this.flkty = c)}
+          className={"carousel"} // default ''
+          elementType={"div"} // default 'div'
+          options={{ wrapAround: true, groupCells: true, pageDots: false , imagesLoaded: true}} // takes flickity options {}
+          disableImagesLoaded={false} // default false
+          reloadOnUpdate={true}
+        >
+          {this.images(this.props.interests)}
+        </Flickity>
       </div>
     );
   }

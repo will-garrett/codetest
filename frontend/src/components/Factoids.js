@@ -1,16 +1,24 @@
 import React from 'react';
+import Factoid from './Factoid';
 
 export default class Factoids extends React.Component{
-  updateSelection(selection){
-    console.log("Factoid selection", selection);
+  state = {
+    factoids: undefined
   }
-  componentDidMount(){
-    console.log("Factoids", this.props);
+  setFactoids(data){
+    this.setState({factoids: data});
+  }
+  renderFactoids(factoids){
+    if(factoids){
+      return factoids.map((entry)=>{
+        return <Factoid key={entry.id} fact={entry.fact} fact_id={entry.id}/>
+      });
+    }
   }
   render(){
     return (
       <div>
-        hello
+        {this.renderFactoids(this.state.factoids)}
       </div>
     )
   }

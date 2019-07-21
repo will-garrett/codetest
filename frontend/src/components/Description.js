@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Header } from 'semantic-ui-react';
 class Description extends React.Component{
   state = {
     description: null
@@ -10,7 +11,7 @@ class Description extends React.Component{
   render(){
     return (
       <div>
-        <h3>{this.state.description}</h3>
+        <Header>{this.state.description}</Header>
       </div>
     );
   }

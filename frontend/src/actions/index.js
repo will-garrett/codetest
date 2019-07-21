@@ -12,7 +12,6 @@ export const fetchInterests = () => async dispatch => {
   const response = await backend.get('/interests');
   dispatch({ type: FETCH_INTERESTS, payload: response.data });
 }
-export const fetchFactoids = (interest_id) => async dispatch =>{
-  const response = await backend.get(`/interest/${interest_id}/factoids`);
-  dispatch({type: FETCH_FACTOIDS, payload: response.data });
+export const createFactoid = (factoid_obj) => async dispatch => {
+  
 }

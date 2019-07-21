@@ -6,29 +6,33 @@ import "../flickity.css";
 import {
   Container,
   Header,
-  Icon,
-  Image,
-  Item,
-  Label,
-  Menu,
+  Divider,
+//  Icon,
+//  Image,
+//  Item,
+//  Label,
+//  Menu,
   Segment,
-  Step,
-  Table,
+//  Step,
+//  Table,
+  Grid,
+//  GridRow,
 } from 'semantic-ui-react'
 
 import Carousel from './Carousel';
 import FactoidForm from "./FactoidForm";
 import Factoids from "./Factoids";
 
+import backend from '../apis/backend';
+
 export default class App extends React.Component {
-  
   constructor(props){
-    super(props);
-    this.selected = null;
+    super(props)
     this.factoids_ref = React.createRef();
   }
-  updateSelection(sel){
-    console.log("App", sel);
+  updateSelection = async (sel)=>{
+    let response = await backend.get(`/interest/${sel}/factoids`);
+    this.factoids_ref.current.setFactoids(response.data)
   }
   hiddenMsg(source, message, forget = true) {
     let src = source.toLowerCase().split("");
@@ -54,29 +58,41 @@ export default class App extends React.Component {
   
   render(){
     let title = this.hiddenMsg(
-      'taxonomy of "things" which i am interested in and keep in high regard that could be considered aesthetically pleasing when presented in a responsive web medium that others may interact and engage with as a means to appraise and assess my drive and abilities.',
+      'taxonomy of "extracurricular interests" which i engage with and keep in high regard that could be considered aesthetically pleasing when presented in a responsive web medium that others may interact and engage with as a means to appraise and assess my drive and abilities.',
       "thank you open drives",
       true
     );
     return (
-      <div className="App">
-        <Header  as='h5' style={{fontVariant: 'small-caps', fontWeight: 100}}>{title}</Header>
-        <Header as='h5' style={{ fontWeight: "100", fontStyle: "italic" }}>
-          and <a href="https://github.com/will-garrett">other ergregious titles</a> by{" "}
-          <a href="mailto:the+spam+folder@willgarrett.io?Subject=Your%20Super%20Long%20Title%20Gave%20Me%20a%20Headache%2C%20And%20I%27ve%20Come%20to%20Return%20The%20Favor">
-            Will Garrett
-          </a>
-        </Header>
-        
+      <div>
+        <Segment inverted>
+          <Header  as='h3' style={{fontVariant: 'small-caps', fontWeight: 100}}>{title}</Header>
+          <Header as='h5' style={{ fontWeight: "100", fontStyle: "italic" }}>
+            and <a href="https://github.com/will-garrett">other ergregious titles</a> by{" "}
+            <a href="mailto:the+spam+folder@willgarrett.io?Subject=Your%20Super%20Long%20Title%20Gave%20Me%20a%20Headache%2C%20And%20I%27ve%20Come%20to%20Return%20The%20Favor">
+              Will Garrett
+            </a>
+          </Header>
+        </Segment>
         <Carousel updater={this.updateSelection}/>
+        <Divider/>
         <Container>
-          <FactoidForm />
-          <Factoids ref={this.factoids_ref} factoids={this.factoids}/>
+          <Grid stackable>
+            <Grid.Row>
+            <Grid.Column computer={7} mobile={16} tablet={7}>
+            <FactoidForm />
+            </Grid.Column>
+            
+            <Grid.Column computer={9} mobile={16} tablet={9}>
+            <Factoids ref={this.factoids_ref}/>
+            </Grid.Column>
+            </Grid.Row>
+          </Grid>  
         </Container>
-        <h5>
+        <Segment inverted vertical style={{ margin: '5em 0em 0em', padding: '3em 0em' }}>
+        <Container>
           Source on <a href="https://github.com/will-garrett/codetest">github</a>
-        </h5>
-        
+          </Container>
+        </Segment>
       </div>
     ); 
   }
