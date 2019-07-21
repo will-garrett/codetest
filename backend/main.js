@@ -3,9 +3,14 @@ const express = require("express");
 const bodyparse = require('body-parser');
 const knex = require("./db/knex");
 const app = new express();
+const cors = require('cors');
 const port = 8888;
 app.use(bodyparse.urlencoded({extended:true}));
 app.use(bodyparse.json());
+app.use(cors());
+
+
+
 app.use(function (error, req, res, next) {
   if (error instanceof SyntaxError) {
     res.json({error: true, message: 'Please check you syntax'});
