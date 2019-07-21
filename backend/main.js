@@ -3,7 +3,7 @@ const express = require("express");
 const bodyparse = require('body-parser');
 const knex = require("./db/knex");
 const app = new express();
-
+const port = 8888;
 app.use(bodyparse.urlencoded({extended:true}));
 app.use(bodyparse.json());
 app.use(function (error, req, res, next) {
@@ -107,6 +107,6 @@ router.route('/interest/:int_id/factoid')
 });
 
 app.use('/', router);
-app.listen(3000, function(){
-  console.log("Listening on 3000");
+app.listen(port, function(){
+  console.log("Listening on "+port);
 });

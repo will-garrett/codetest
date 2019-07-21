@@ -1,15 +1,31 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Flickity from "react-flickity-component";
+
 import 'flickity-imagesloaded';
 import "./styles.css";
 import "./flickity.css";
 
+import {
+  Button,
+  Container,
+  Grid,
+  Header,
+  Icon,
+  Image,
+  Item,
+  Label,
+  Menu,
+  Segment,
+  Step,
+  Table,
+} from 'semantic-ui-react'
+
+import Description from './components/Description';
+import FactoidForm from "./components/FactoidForm";
 class Carousel extends React.Component {
   componentDidMount() {
-    console.log(this.flkty);
     this.flkty.on("settle", () => {
-      console.log(this.flkty);
       // update description
       // update factoid
     });
@@ -29,57 +45,17 @@ class Carousel extends React.Component {
         elementType={"div"} // default 'div'
         options={{ wrapAround: true, groupCells: true, pageDots: false , imagesLoaded: true}} // takes flickity options {}
         disableImagesLoaded={false} // default false
-        
       >
         {this.images(this.props.muh_interests)}
       </Flickity>
     );
   }
 }
-class FactForm extends React.Component {
-  render() {
-    return (
-      <div style={{ padding: "10px" }}>
-        <form>
-          <p>
-            <label htmlFor="factoid">Add Your Factoid: </label>
-            <textarea
-              placeholder='Example: People would generally describe me as no nonsense, brief, and "to the point", but bad at writing titles.'
-              name="factoid"
-            />
-          </p>
-          <button>Create New Interest</button>
-        </form>
-      </div>
-    );
-  }
-}
-function DescriptionComponent(props) {
-  return (
-    <div>
-      <p>{props.description}</p>
-    </div>
-  );
-}
-function App() {
-  let things = [
-    {
-      id: 1,
-      description: "Yvette",
-      image_loc: "/img/yvette.jpg"
-    },
-    {
-      id: 2,
-      description: "Suzy at the Beach",
-      image_loc: "/img/suzy.jpg"
-    },
-    {
-      id: 3,
-      description: "Corner",
-      image_loc: "/img/cornering.jpg"
-    }
-  ];
-  function hiddenMsg(source, message, forget = true) {
+
+
+class App extends React.Component {
+  
+  hiddenMsg(source, message, forget = true) {
     let src = source.toLowerCase().split("");
     let msg = message.toLowerCase().split("");
     let current = msg.shift();
@@ -101,33 +77,55 @@ function App() {
     }
     return msg_received ? src.join("") : false;
   }
-  let title = hiddenMsg(
-    'a singular taxonomy of "things" which i am interested in and keep in high regard that could conceptually be visually appealing or considered aesthetically pleasing when presented in a responsive web medium that others may interact & engage with as a means to appraise and assess my abilities whereby i may communicate my readiness and drive towards exsistential fullfilment...',
-    "thank you open drives",
-    true
-  );
-
-  return (
-    <div className="App">
-      <h1 style={{ fontWeight: "100", fontVariant: "small-caps" }}>
-        {title}
-      </h1>
-      <h3 style={{ fontWeight: "100", fontStyle: "italic" }}>
-        and{" "}
-        <a href="https://github.com/will-garrett">other ergregious titles</a> by{" "}
-        <a href="mailto:the+spam+folder@willgarrett.io?Subject=Your%20Super%20Long%20Title%20Gave%20Me%20a%20Headache%2C%20And%20I%27ve%20Come%20to%20Return%20The%20Favor">
-          Will Garrett
-        </a>
-      </h3>
-      <h5>
-        Source on <a href="https://github.com/will-garrett/codetest">github</a>
-      </h5>
-      <Carousel muh_interests={things} />
-      <DescriptionComponent description="A Description of A Thing" />
-      <FactForm />
-    </div>
-  );
+  // load images action
+  
+  render(){
+    let things = [
+      {
+        id: 1,
+        description: "Yvette",
+        image_loc: "/img/yvette.jpg"
+      },
+      {
+        id: 2,
+        description: "Suzy at the Beach",
+        image_loc: "/img/suzy.jpg"
+      },
+      {
+        id: 3,
+        description: "Corner",
+        image_loc: "/img/cornering.jpg"
+      }
+    ];
+    let title = this.hiddenMsg(
+      'a singular taxonomy of "things" which i am interested in and keep in high regard that could conceptually be visually appealing or considered aesthetically pleasing when presented in a responsive web medium that others may interact & engage with as a means to appraise and assess my abilities whereby i may communicate my readiness and drive towards exsistential fullfilment...',
+      "thank you open drives",
+      true
+    );
+    return (
+      <div className="App">
+        <Header  as='h1' style={{fontVariant: 'small-caps', fontWeight: 100}}>{title}</Header>
+        <Header as='h3' style={{ fontWeight: "100", fontStyle: "italic" }}>
+          and <a href="https://github.com/will-garrett">other ergregious titles</a> by{" "}
+          <a href="mailto:the+spam+folder@willgarrett.io?Subject=Your%20Super%20Long%20Title%20Gave%20Me%20a%20Headache%2C%20And%20I%27ve%20Come%20to%20Return%20The%20Favor">
+            Will Garrett
+          </a>
+        </Header>
+        
+        <Description description="A Description of A Thing" />
+        <Carousel muh_interests={things} />
+        <div class="container">
+          <FactoidForm />
+        </div>
+        <h5>
+          Source on <a href="https://github.com/will-garrett/codetest">github</a>
+        </h5>
+      </div>
+    ); 
+  }
+  
 }
 
 const rootElement = document.getElementById("root");
+
 ReactDOM.render(<App />, rootElement);

@@ -5,11 +5,16 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "axios": "^0.19.0",
     "flickity-imagesloaded": "^2.0.0",
     "react": "16.5.2",
     "react-dom": "16.5.2",
     "react-flickity-component": "^3.2.0",
-    "react-scripts": "^3.0.1"
+    "react-redux": "^7.1.0",
+    "react-scripts": "^3.0.1",
+    "redux": "^4.0.4",
+    "redux-form": "^8.2.4",
+    "semantic-ui-react": "^0.87.3"
   },
   "devDependencies": {},
   "scripts": {
