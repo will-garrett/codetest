@@ -1,7 +1,12 @@
 import React from 'react';
 import {
   Message, 
-//  Icon
+  Grid, 
+  Icon, 
+  GridRow, 
+  GridColumn,
+  Modal,
+  Button
 } from 'semantic-ui-react';
 export default class Factoid extends React.Component{
   dismiss = ()=>{
@@ -15,10 +20,26 @@ export default class Factoid extends React.Component{
 
     return (
       <Message 
-        icon='bullhorn'
-        content={this.props.fact}
         onDismiss={this.dismiss}   
-      />
+      >
+     <Grid>
+      <GridRow>
+        <GridColumn padded="horizontally" verticalAlign="middle" centered width={1}>
+        
+          <Icon link circular inverted name='pencil' />
+        
+        </GridColumn>
+        <GridColumn padded="horizontally" verticalAlign="middle"  centered width={1}>
+        
+          <Icon link circular inverted color="red" name='trash' />
+        </GridColumn>      
+        
+        <GridColumn width={14}>
+          {this.props.fact}
+        </GridColumn>
+      </GridRow>
+      </Grid>  
+      </Message>
     )
   }
 }

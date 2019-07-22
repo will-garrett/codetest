@@ -7,16 +7,8 @@ import {
   Container,
   Header,
   Divider,
-//  Icon,
-//  Image,
-//  Item,
-//  Label,
-//  Menu,
   Segment,
-//  Step,
-//  Table,
   Grid,
-//  GridRow,
 } from 'semantic-ui-react'
 
 import Carousel from './Carousel';
