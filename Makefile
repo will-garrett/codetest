@@ -7,6 +7,7 @@ help: ## This help.
 
 all: ## Build the containers
 	@printf "\033[36m%-30s\033[0m %s\n" "Building Docker Images"
+	@cp env-example .env
 	@docker-compose build
 
 run: ## Run docker-compose and migrations
@@ -14,10 +15,10 @@ run: ## Run docker-compose and migrations
 	@docker-compose up -d
 	# this could/should be a while loop
 	@if [ ! -d "./_data/codetest" ]; then printf "\033[36m%-30s\033[0m %s\n" "Waiting for MySQL" && sleep 60; fi
-	@printf "\033[33m%-30s\033[0m %s\n" "Running Database Migrations/Seeds..."
-	@docker exec backend.codetest knex migrate:latest
-	@docker exec backend.codetest knex seed:run
-	@printf "\033[33m%-30s\033[0m %s\n" "Running Database Migrations/Seeds..."
+	@printf "\033[33m%-30s\033[0m %s\n" "Running Database Migrations/Seeds..." && sleep 5
+	@docker exec -t backend.codetest knex migrate:latest
+	@docker exec -t backend.codetest knex seed:run
+	@printf "\033[33m%-30s\033[0m %s\n" "Done..."
 	
 	
 stop:

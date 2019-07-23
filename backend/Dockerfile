@@ -2,11 +2,11 @@ FROM node:10
 
 WORKDIR /app
 
-COPY package*.json ./
-
+COPY package.json .
+COPY package-lock.json .
 RUN npm install
 
-COPY . ./
+COPY . .
 
 RUN npm i -g knex pm2
 

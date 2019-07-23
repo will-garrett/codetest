@@ -1,0 +1,5 @@
+SQL_HOST=db.codetest
+SQL_ROOT=root
+SQL_DB=codetest
+SQL_USER=username
+SQL_PASS=password
