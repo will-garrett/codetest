@@ -18,7 +18,7 @@ We expect this test to take you about *6 - 10 hours*. Given that most people are
 * [ ] Commit early and often. I'll likely be following along with your progress.
 
 #### Upon completing this, please email to us:
-* [ ] A link to your git repository such that we may view your code.
+* [X] A link to your git repository such that we may view your code.
 * [ ] A link to somewhere where we may interact with a demo of your finished product
 
 ## Front End Requirements
@@ -26,23 +26,23 @@ We expect this test to take you about *6 - 10 hours*. Given that most people are
 The User Interface should be made out of a MVVM or MVC style frontend technology, using an asynchronous transport technology to talk to your backend.
 
 #### The user interface should present a card like entry containing
-* [ ] A small picture of the item
-* [ ] A description of the item
-* [ ] A fun factoid for the item
+* [X] A small picture of the item
+* [X] A description of the item
+* [X] A fun factoid for the item
 
 #### Interactions
-* [ ] The user should be able to dismiss the currently presented card, making it disappear and presenting the next card in the stack. (Think of swiping in Tinder)
-* [ ] The user should be able to create their own factoid to be added to the fact stack.
-* [ ] The user should be able to remove a factoid from the fact stack.
+* [X] The user should be able to dismiss the currently presented card, making it disappear and presenting the next card in the stack. (Think of swiping in Tinder)
+* [X] The user should be able to create their own factoid to be added to the fact stack.
+* [X] The user should be able to remove a factoid from the fact stack.
 
 ## Backend Requirements
 
 The Backend should be node.js with whatever middlewares you'd like to use.
 
 #### Interactions to support
-* [ ] Please provide a RESTful backend for the CRUDL of factoids
-* [ ] Factoids should be transported to the UI via JSON
-* [ ] Factoids should be stored in some sort of SQL/NoSQL/Flat File on the backend
+* [X] Please provide a RESTful backend for the CRUDL of factoids
+* [X] Factoids should be transported to the UI via JSON
+* [X] Factoids should be stored in some sort of SQL/NoSQL/Flat File on the backend
 
 ## BONUS
 
@@ -50,7 +50,7 @@ Consider adding some improvements to what you've made to really showcase your st
 
 ### Suggestions for improvements
 * [ ] Integrate this with an external Service or API (Pokemon API FTW)
-* [ ] Make it work on Mobile device sizes. 
+* [X] Make it work on Mobile device sizes. 
 * [ ] Write a test or two for your code.
 * [ ] Add a lint file and make sure your code is linted. 
 * [ ] Add CD/CI to your project to auto-deploy it
