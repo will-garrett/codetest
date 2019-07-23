@@ -59,3 +59,12 @@ Consider adding some improvements to what you've made to really showcase your st
 ## Closing Thoughts
 
 Every developer on our team has completed this code challenge or the [platform code challenge](https://github.com/ultamatt/linuxtest), so show us what you can do! We're excited to see what kind of contributions you could make to our team. 
+
+
+### Will - Local Notes
+
+```bash
+make all
+make run
+```
+
