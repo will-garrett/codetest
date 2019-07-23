@@ -1,6 +1,9 @@
 
 exports.seed = function(knex) {
-  return knex('interests').del()
+  return knex('factoids').del()
+    .then(()=>{
+      return knex('interests').del()
+    })
     .then(function () {
       // Inserts seed entries
       return knex('interests').insert([

@@ -17,10 +17,39 @@ services:
     volumes:
       - "./_data:/var/lib/mysql"
     command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
-#  backend:
-#    build:
-#      context: ./backend
-#      Dockerfile: Dockerfile
+  backend:
+    container_name: backend.codetest
+    hostname: backend.codetest
+    build:
+      context: ./backend
+    environment:
+      SQL_HOST: db.codetest
+      SQL_DB: ${SQL_DB}
+      SQL_USER: ${SQL_USER}
+      SQL_PASS: ${SQL_PASS}
+      NODE_ENV: production
+      NODE_PORT: 3000
+    volumes:
+      - "./backend:/app"
+    ports:
+      - 8888:3000
+    networks:
+      - codetest
+    depends_on:
+      - db
+  frontend:
+    container_name: frontend.codetest
+    hostname: frontend.codetest
+    build:
+      context: ./frontend
+    volumes:
+      - "./frontend:/app"
+    ports:
+      - 80:3000
+    networks:
+      - codetest
+    depends_on:
+      - backend
 networks:
   codetest: 
     driver: "bridge"

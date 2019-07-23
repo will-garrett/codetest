@@ -1,0 +1,13 @@
+FROM node:10
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . ./
+
+RUN npm i -g knex pm2
+
+CMD ["pm2-runtime", "--name", "backend", "--watch", "main.js"]

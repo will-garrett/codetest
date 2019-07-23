@@ -4,6 +4,7 @@
   "description": "CRUD backend for webservice",
   "main": "main.js",
   "scripts": {
+    "start": "node main.js",
     "test": "jest"
   },
   "author": "Will Garrett <the+dev@willgarrett.io>",

@@ -4,7 +4,7 @@ const bodyparse = require('body-parser');
 const knex = require("./db/knex");
 const app = new express();
 const cors = require('cors');
-const port = 8888;
+const port = process.env.NODE_PORT;
 app.use(bodyparse.urlencoded({extended:true}));
 app.use(bodyparse.json());
 app.use(cors());

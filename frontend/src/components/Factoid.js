@@ -24,12 +24,12 @@ export default class Factoid extends React.Component{
       >
      <Grid>
       <GridRow>
-        <GridColumn padded="horizontally" verticalAlign="middle" centered width={1}>
-        
+        <GridColumn stacked padded="horizontally" verticalAlign="middle" centered width={1}>
+
           <Icon link circular inverted name='pencil' />
         
         </GridColumn>
-        <GridColumn padded="horizontally" verticalAlign="middle"  centered width={1}>
+        <GridColumn stacked padded="horizontally" verticalAlign="middle"  centered width={1}>
         
           <Icon link circular inverted color="red" name='trash' />
         </GridColumn>      
