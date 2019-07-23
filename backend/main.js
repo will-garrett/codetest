@@ -74,19 +74,20 @@ router.route('/interest/:int_id/factoid/:f_id')
     })
   });
 
-router.route('/interest/:int_id/factoid/:f_id')
+router.route('/factoid/:f_id')
   .put(function(req, res){
-    let interest_id = req.body.interest_id;
+    console.log(req.params);
     let fact = req.body.fact;
     
     let payload = {};
-    if(interest_id){
-      payload.interest_id = interest_id;
+    if(req.body.interest_id){
+      payload.interest_id = req.body.interest_id;
     }
     if(fact){
       payload.fact = fact;
     }
     if(Object.entries(payload).length !== 0){
+      console.log("payload");
       knex('factoids').where({id: req.params.f_id})
       .update(payload).then(result=>{
         res.json({updated: req.params.f_id});
@@ -99,6 +100,13 @@ router.route('/interest/:int_id/factoid/:f_id')
       res.json({error: true, message: "Undefined body, must contain `fact`"}).status(406)
     }
   })
+  .delete(function(req, res){
+    let id = req.params.f_id;
+    knex('factoids').where({id}).del().then(res.json({deleted: id}))
+    .catch(err=>{
+      res.json({error: true, message: err.message});
+    });
+  });
   
 router.route('/interest/:int_id/factoid')
 .post(function(req, res){

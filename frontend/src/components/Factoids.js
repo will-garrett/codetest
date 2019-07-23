@@ -11,7 +11,7 @@ export default class Factoids extends React.Component{
   renderFactoids(factoids){
     if(factoids){
       return factoids.map((entry)=>{
-        return <Factoid key={entry.id} fact={entry.fact} fact_id={entry.id}/>
+        return <Factoid interest_id={entry.interest_id} key={entry.id} fact={entry.fact} fact_id={entry.id}/>
       });
     }
   }

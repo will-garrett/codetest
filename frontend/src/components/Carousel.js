@@ -22,6 +22,7 @@ class Carousel extends React.Component {
       this.d_ref.current.setState({description: this.props.interests[this.flkty.selectedIndex].description});
       this.props.updater(this.props.interests[this.flkty.selectedIndex].id);
     });
+    this.setState({selected: this.flkty.selectedIndex});
   }
   description(){
     if(Object.entries(this.props.interests).length !== 0){
@@ -45,12 +46,13 @@ class Carousel extends React.Component {
     return (
       <div>
         <Description ref={this.d_ref} description={this.description()} />
-        <Divider/>
+        
         <Flickity
+          /// todo add current cell to state, fix update bugs
           flickityRef={c => (this.flkty = c)}
           className={"carousel"} // default ''
           elementType={"div"} // default 'div'
-          options={{ wrapAround: true, groupCells: true, pageDots: false , imagesLoaded: true}} // takes flickity options {}
+          options={{ wrapAround: true, groupCells: true, pageDots: false , imagesLoaded: true, initialIndex: this.state.selected}} // takes flickity options {}
           disableImagesLoaded={false} // default false
           reloadOnUpdate={true}
         >
@@ -63,7 +65,6 @@ class Carousel extends React.Component {
 
 
 const mapStateToProps = (state) => {
-  
   return { 
     interests: Object.values(state.interests),
   };

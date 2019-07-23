@@ -13,6 +13,7 @@
     "react-flickity-component": "^3.3.0",
     "react-redux": "^7.1.0",
     "react-scripts": "^3.0.1",
+    "react-semantic-redux-form": "^1.2.6",
     "redux": "^4.0.4",
     "redux-form": "^8.2.4",
     "redux-thunk": "^2.3.0",

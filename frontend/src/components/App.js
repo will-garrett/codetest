@@ -18,13 +18,17 @@ import Factoids from "./Factoids";
 import backend from '../apis/backend';
 
 export default class App extends React.Component {
+  state = {selected: null};
   constructor(props){
     super(props)
+    this.factform_ref = React.createRef();
     this.factoids_ref = React.createRef();
+    
   }
   updateSelection = async (sel)=>{
     let response = await backend.get(`/interest/${sel}/factoids`);
     this.factoids_ref.current.setFactoids(response.data)
+    this.setState({selected: sel});
   }
   hiddenMsg(source, message, forget = true) {
     let src = source.toLowerCase().split("");
@@ -71,11 +75,11 @@ export default class App extends React.Component {
           <Grid stackable>
             <Grid.Row>
             <Grid.Column computer={7} mobile={16} tablet={7}>
-            <FactoidForm />
+            <FactoidForm selected={this.state.selected}/>
             </Grid.Column>
             
             <Grid.Column computer={9} mobile={16} tablet={9}>
-            <Factoids ref={this.factoids_ref}/>
+            <Factoids ref={this.factoids_ref} />
             </Grid.Column>
             </Grid.Row>
           </Grid>  
